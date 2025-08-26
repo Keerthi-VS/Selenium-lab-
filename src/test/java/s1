@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="Suite">
+  <test name="Test">
+    <classes>
+      <class name="Pac1.TC001_testNg"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
