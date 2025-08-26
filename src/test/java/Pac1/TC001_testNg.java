@@ -7,6 +7,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.BeforeClass;
  
 import java.time.Duration;
@@ -16,6 +17,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
@@ -24,6 +27,7 @@ import org.testng.annotations.AfterSuite;
  
 public class TC001_testNg {
 	WebDriver driver;
+	private String brow;
   @Test(dataProvider="logindata")
   public void f(String username, String password) {
 	  System.out.println("This is the test");
@@ -42,14 +46,30 @@ public class TC001_testNg {
 		driver.findElement(By.name("username")).sendKeys(Keys.ENTER);
 
   }
-
+  @Parameters("browser")
   @BeforeMethod
-  public void beforeMethod() {
+  public void beforeMethod(String brow) {
 	  System.out.println("This is Before Method");
+	  if(brow.equalsIgnoreCase("chrome"))
+	  {
 	  WebDriverManager.chromedriver().setup();
 		 driver=new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	  }
+	  if(brow.equalsIgnoreCase("edge"))
+	  {
+	  WebDriverManager.edgedriver().setup();
+		 driver=new EdgeDriver();
+	  }
+	  if(brow.equalsIgnoreCase("firefox"))
+	  {
+	  WebDriverManager.firefoxdriver().setup();
+		 driver=new FirefoxDriver();
+	  }
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
   }
+ 
+	  
+ 
  
   @AfterMethod
   public void afterMethod() {

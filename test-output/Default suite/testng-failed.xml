@@ -3,13 +3,19 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="Pac1.Testng_lab3">
+      <class name="Pac1.Lab_9">
         <methods>
+          <include name="afterClass"/>
           <include name="afterMethod"/>
-          <include name="f"/>
+          <include name="beforeTest"/>
           <include name="beforeMethod"/>
+          <include name="beforeSuite"/>
+          <include name="afterSuite"/>
+          <include name="afterTest"/>
+          <include name="beforeClass"/>
+          <include name="f"/>
         </methods>
-      </class> <!-- Pac1.Testng_lab3 -->
+      </class> <!-- Pac1.Lab_9 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -1,0 +1,134 @@
+<html>
+<head>
+<title>TestNG:  ChromeTest</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>ChromeTest</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>3/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Tue Aug 26 16:25:33 IST 2025</td>
+</tr>
+<tr><td>Total time:</td><td>21 seconds (21741 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='Pac1.Lab_9.f()'><b>f</b><br>Test class: Pac1.Lab_9<br>Parameters: pooja, welcome<br/>
+<a href="#Output-158741282" onClick='toggleBox("Output-158741282", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-158741282" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-158741282">
+Opened URL in browser<br/>
+Navigated to Mac section<br/>
+Selected sort: Name (A-Z)<br/>
+Clicked Add to Cart for Mac<br/>
+Success message: Success: You have added iMac to your shopping cart!
+×<br/>
+</div>
+</td>
+<td></td>
+<td>3</td>
+<td>Pac1.Lab_9@37ceb1df</td></tr>
+<tr>
+<td title='Pac1.Lab_9.f()'><b>f</b><br>Test class: Pac1.Lab_9<br>Parameters: Admin, admin123<br/>
+<a href="#Output-1242724792" onClick='toggleBox("Output-1242724792", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1242724792" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1242724792">
+Opened URL in browser<br/>
+Navigated to Mac section<br/>
+Selected sort: Name (A-Z)<br/>
+Clicked Add to Cart for Mac<br/>
+Success message: Success: You have added iMac to your shopping cart!
+×<br/>
+</div>
+</td>
+<td></td>
+<td>3</td>
+<td>Pac1.Lab_9@37ceb1df</td></tr>
+<tr>
+<td title='Pac1.Lab9_2.f()'><b>f</b><br>Test class: Pac1.Lab9_2<br>Parameters: 1, a<br/>
+<a href="#Output-240912321" onClick='toggleBox("Output-240912321", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-240912321" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-240912321">
+Opened URL in Chrome<br/>
+Verified page title: Your Store<br/>
+Navigated to Mac section<br/>
+Verified Mac heading<br/>
+Selected sort: Name (A-Z)<br/>
+Clicked Add to Cart for Mac<br/>
+Searched for 'Monitors'<br/>
+Performed advanced search with description enabled<br/>
+Verified search results<br/>
+</div>
+</td>
+<td></td>
+<td>5</td>
+<td>Pac1.Lab9_2@6f4a47c7</td></tr>
+</table><p>
+</body>
+</html>
