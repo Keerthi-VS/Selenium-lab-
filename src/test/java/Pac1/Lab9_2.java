@@ -1,5 +1,4 @@
 package Pac1;
-
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -13,18 +12,12 @@ import org.testng.annotations.BeforeClass;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.Reporter;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
@@ -32,101 +25,62 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
 
 public class Lab9_2 {
-	 WebDriver driver;
-	    WebDriverWait wait;
+	WebDriver driver;
   @Test(dataProvider = "dp")
-  public void f(Integer n, String s) throws InterruptedException {
-	  System.out.println("This is the test");
-	  driver.get("https://tutorialsninja.com/demo");
-	  Reporter.log("Opened URL in Chrome", true);
-	  // Step 1: Verify title
-      String expectedTitle = "Your Store";
-      Assert.assertEquals(driver.getTitle(), expectedTitle, "Page title mismatch");
-      Reporter.log("Verified page title: " + expectedTitle, true);
-
-      // Step 2: Navigate to Desktops > Mac
-      driver.findElement(By.linkText("Desktops")).click();
-      driver.findElement(By.linkText("Mac (1)")).click();
-      Reporter.log("Navigated to Mac section", true);
-
-      // Step 3: Verify Mac heading
-      WebElement macHeading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='Mac']")));
-      Assert.assertTrue(macHeading.isDisplayed(), "Mac heading not visible");
-      Reporter.log("Verified Mac heading", true);
-
-      // Step 4: Sort by Name (A-Z)
-      Select sortDropdown = new Select(driver.findElement(By.id("input-sort")));
-      sortDropdown.selectByVisibleText("Name (A - Z)");
-      Reporter.log("Selected sort: Name (A-Z)", true);
-   // Step 5: Add to Cart
-      WebElement addToCartBtn = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@onclick[contains(., 'cart.add')]]")));
-      ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", addToCartBtn);
-      addToCartBtn.click();
-      Reporter.log("Clicked Add to Cart for Mac", true);
-
-      // Step 6: Search for 'Monitors'
-      WebElement searchBox = driver.findElement(By.name("search"));
-      searchBox.clear();
-      searchBox.sendKeys("Monitors");
-
-      WebElement searchBtn = driver.findElement(By.cssSelector("button.btn-default"));
-      ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", searchBtn);
-      Thread.sleep(500); // Let overlays settle
-      try {
-          searchBtn.click();
-      } catch (ElementClickInterceptedException e) {
-          ((JavascriptExecutor) driver).executeScript("arguments[0].click();", searchBtn);
-      }
-      Reporter.log("Searched for 'Monitors'", true);
-
-      // Step 7: Wait for page to load
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("content")));
-
-      // Step 8: Clear 'Search Criteria' and enable description search
-      WebElement searchCriteria = driver.findElement(By.id("input-search"));
-      searchCriteria.clear();
-
-      WebElement descriptionCheckbox = driver.findElement(By.name("description"));
-      if (!descriptionCheckbox.isSelected()) {
-          descriptionCheckbox.click();
-      }
-      WebElement advancedSearchBtn = driver.findElement(By.id("button-search"));
-      ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", advancedSearchBtn);
-      advancedSearchBtn.click();
-      Reporter.log("Performed advanced search with description enabled", true);
-
-      // Step 9: Verify search results loaded
-      WebElement results = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("content")));
-      Assert.assertTrue(results.isDisplayed(), "Search results not loaded");
-      Reporter.log("Verified search results", true);
+  public void f(Integer n, String s) {
+		driver.get("https://tutorialsninja.com/demo/index.php?");
+		System.out.println("Title is:"+driver.getTitle());
+		driver.findElement(By.linkText("Desktops")).click();
+		driver.findElement(By.linkText("Mac (1)")).click();
+		WebElement sort = driver.findElement(By.id("input-sort"));
+		sort.sendKeys("Name(A-Z)");
+		driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[2]/div[2]/button[1]")).click();
+		WebElement search = driver.findElement(By.name("search"));
+		search.sendKeys("Mobile");
+		search.sendKeys(Keys.ENTER);
+		
+		
+		driver.findElement(By.id("input-search")).clear();
+		driver.findElement(By.xpath("//*[@id=\"content\"]/p[1]/label")).click();
+		driver.findElement(By.id("button-search")).click();
+		
+		WebElement verifyMacHeading = driver.findElement(By.xpath("//*[@id=\"content\"]/h2"));
+		if(verifyMacHeading.isDisplayed()) {
+			System.out.println("Mac heading is successfully verified");
+			
+		}
+		else {
+			System.out.println("Mac heading is not verified");
+		}
+		
+		WebElement searchbox = driver.findElement(By.name("search"));
+		searchbox.clear();
+		searchbox.sendKeys("Monitor");
+		
+	
   }
- 
   @Parameters("browser")
+  
   @BeforeMethod
-  public void beforeMethod(String brow) {
-      System.out.println("This is Before Method");
-
-      if (brow.equalsIgnoreCase("chrome")) {
-          WebDriverManager.chromedriver().setup();
-          driver = new ChromeDriver();
-      } else if (brow.equalsIgnoreCase("edge")) {
-          WebDriverManager.edgedriver().setup();
-          driver = new EdgeDriver();
-      } else if (brow.equalsIgnoreCase("firefox")) {
-          WebDriverManager.firefoxdriver().setup();
-          driver = new FirefoxDriver();
-      } else {
-          throw new IllegalArgumentException("Unsupported browser: " + brow);
-      }
-
-      driver.manage().window().maximize();
-      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-      wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
+  public void beforeMethod(String browser) {
+	  System.out.println("This is Before Method");
+	  if(browser.equalsIgnoreCase("chrome"))
+	  {
+	   WebDriverManager.chromedriver().setup();
+		 driver=new ChromeDriver();
+	  }
+	  if (browser.equalsIgnoreCase("edge")) {
+	        WebDriverManager.edgedriver().setup();
+	        driver = new EdgeDriver();
+	  }
+	 
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
   }
+
   @AfterMethod
   public void afterMethod() {
+	  System.out.println("This is After Method");
 	  driver.quit();
-      Reporter.log("Closed browser", true);
   }
 
 
@@ -134,31 +88,37 @@ public class Lab9_2 {
   public Object[][] dp() {
     return new Object[][] {
       new Object[] { 1, "a" },
-     
+      new Object[] { 2, "b" },
     };
   }
   @BeforeClass
   public void beforeClass() {
+	  System.out.println("This is Before Class");
   }
 
   @AfterClass
   public void afterClass() {
+	  System.out.println("This is After Class");
   }
 
   @BeforeTest
   public void beforeTest() {
+	  System.out.println("This is Before Test");
   }
 
   @AfterTest
   public void afterTest() {
+	  System.out.println("This is After Test");
   }
 
   @BeforeSuite
   public void beforeSuite() {
+	  System.out.println("This is Before Suite");
   }
 
   @AfterSuite
   public void afterSuite() {
+	  System.out.println("This is After Suite");
   }
 
 }

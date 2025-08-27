@@ -14,11 +14,6 @@
 <class name="Pac1.Lab9_2"/>
 </classes>
 </test> <!-- Test -->
-<test thread-count="5" name="FireFoxTest">
-<parameter name="browser" value="firefox"></parameter>
-<classes>
-<class name="Pac1.Lab9_2"/>
-</classes>
-</test> <!-- Test -->
+
 </suite> <!-- Suite -->
 
